@@ -21,3 +21,17 @@
   from { transform: rotate(0deg); }
   to { transform: rotate(360deg); }
 }
+
+.add-new,
+.tasks {
+ margin: 15px 0;
+}
+
+.category,
+.todo {
+  max-height: 550px;
+  overflow-y: auto;
+}
+.fa {
+  margin: 0 3px;
+}
