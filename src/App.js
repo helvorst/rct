@@ -7,7 +7,8 @@ import Category from './comps/category/category.component';
 import TodoList from './comps/todo/todo-list/todo-list.component';
 import TodoEdit from './comps/todo/todo-edit/todo-edit.component';
 
-const categories = [
+
+const categoriesRaw = [
     {
         id: 0,
         name: "Category 1 Clean",
@@ -47,6 +48,8 @@ const categories = [
     },
     {id: 3, name: "Category 4 Empty", todos: []}
 ];
+let categories = categoriesRaw; // Immutable.List(categoriesRaw);
+
 
 class App extends Component {
 
@@ -65,14 +68,14 @@ class App extends Component {
                 onAssignCategory: this.assignCategoryHandler,
                 onAdd: this.addHandler, // for both category & todo
                 onDelete: this.deleteHandler, //for category only
-                onAddSubcategory: this.addSubCategoryHandler
+                onAddSubcategory: this.addSubCategoryHandler,
+                onSearch: this.searchHandler
             }
         };
     }
 
     componentDidMount() {
         this.setCategoryHandler(categories[0]);
-        console.log('mount')
     }
 
     getId = (arr) => arr.length;
@@ -162,7 +165,7 @@ class App extends Component {
                 arr.splice(ind, 1);
                 return;
             } else {
-                return arr.map(a => a.sub? traverse(a.sub, item) : null);
+                return arr.map(a => a.sub ? traverse(a.sub, item) : null);
             }
         };
         traverse(categories, deleteCategory);
@@ -174,12 +177,38 @@ class App extends Component {
         this.setCategoryHandler(currentCategory);
     };
 
+    searchHandler = (search, done) => {
+        // todo "done" doesnt work: "done" is lost after categories=[new]
+        const traverse = (item) => {
+            item.todos = item.todos || [];
+            item.todos = item.todos.filter(todo => {
+                return todo.name.toLocaleLowerCase().indexOf(search) > -1
+                && (done ? todo.done == done : true)
+            });
+            const match = item.todos.length > 0 ? true : false;
+            if (item.sub) {
+                return match || traverse(item.sub);
+            }
+            else return match;
+        };
+        // todo: whois a fool
+        //categories = Object.assign({}, categoriesRaw);
+        //categories = categoriesRaw.slice(0);
+        categories = JSON.parse(JSON.stringify(categoriesRaw));
+        categories = categories.filter(cat => traverse(cat));
+        //todo
+        //todo
+        //todo
+        //todo
+        //todo: must be other way to refresh view
+        this.setCategoryHandler(categories[0]);
+        console.log(categories)
+    };
 
     render() {
         const getTodoList = () => {
             if (!this.state.category || !this.state.category.todos)
                 return [];
-            console.log(this.state.category)
             return this.state.category.todos;
         };
         const top = this.state.isEdit
@@ -188,7 +217,7 @@ class App extends Component {
                   <h5>{this.state.category.name}</h5>
               </div>
               : <div>
-                  <Header/>
+                  <Header actions={this.state.actions}/>
                   <Progress />
                   <div className="row add-new">
                       <div className="col-sm-6"><AddNew for="category" actions={this.state.actions}/></div>

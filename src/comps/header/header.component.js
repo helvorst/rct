@@ -7,7 +7,7 @@ export default class Header extends React.Component {
                   <h1>
                       To-Do List
                   </h1>
-                  <Search/>
+                  <Search actions={this.props.actions}/>
               </div>
         )
     }
