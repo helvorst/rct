@@ -31,7 +31,7 @@ export default class Category extends React.Component {
       return (
         <div className="item" key={x.id}>
           <div className={"item-body " + (this.props.category === x ? 'selected' : '')}>
-            <div onClick={() => this.props.isEdit ? null : this.props.actions.onSetCategory(x)}>{x.name}</div>
+            <div className="title" onClick={() => this.props.isEdit ? null : this.props.actions.onSetCategory(x)}>{x.name}</div>
             {controls}
           </div>
           {x.sub && x.sub.length > 0 && <div className="sub">{categoriesList(x.sub)}</div>}
