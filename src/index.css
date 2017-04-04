@@ -4,7 +4,12 @@ body {
   font-family: sans-serif;
 }
 
-label {
-  font-size: small;
-  margin: 0 5px;
+
+
+input[type="radio"], input[type="checkbox"] {
+  margin: 4px 5px;
+}
+
+.row {
+  margin: 5px 0;
 }

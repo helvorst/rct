@@ -1,3 +1,16 @@
 .category-controls{
     float: right;
 }
+
+.selected {
+    background-color: lightskyblue;
+}
+.item {
+    border-top: 1px solid #dddddd;
+}
+.item-body {
+    padding: 10px;
+}
+.sub {
+    margin-left: 20px;
+}
