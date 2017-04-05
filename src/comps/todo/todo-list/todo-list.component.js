@@ -13,27 +13,31 @@ export default class TodoList extends React.Component {
     if(!this.props.todos.length){
       return <div>no todos</div>
     }
-    const renderTodos = () => this.props.todos.map(x => {
-      return <li className={"list-group-item " + (this.props.todo === x ? 'selected' : '')}
-                 key={x.id}
-                 onClick={() => this.props.actions.onSetTodo(x)}>
+    const renderTodos = () => this.props.todos.map(this.createItem.bind(this));
+
+    return <ul className="list-group">{renderTodos()}</ul>;
+  }
+
+  createItem(item) {
+
+      return <li className={"list-group-item " + (this.props.todo === item ? 'selected' : '')}
+                 key={item.id}
+                 onClick={() => this.props.actions.onSetTodo(item)}>
         <div className="row">
           <div className="pull-left">
             <div>
-              <input type="checkbox" value={x.done} checked={x.done} onChange={ev => this.done(ev)}/>
-              {x.name}
+              <input type="checkbox" value={item.done} checked={item.done} onChange={ev => this.done(ev)}/>
+              {item.name}
             </div>
             <div className="description">
-              {x.description}
+              {item.description}
             </div>
           </div>
           <div className="pull-right">
-            <a onClick={() => this.props.actions.onEditTodo(x)}><i className="fa fa-edit"></i></a>
+            <a onClick={() => this.props.actions.onEditTodo(item)}><i className="fa fa-edit"></i></a>
           </div>
         </div>
       </li>
-    });
 
-    return <ul className="list-group">{renderTodos()}</ul>;
   }
 }
