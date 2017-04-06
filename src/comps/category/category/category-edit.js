@@ -1,11 +1,11 @@
 import React from 'react';
-
+import Input from '../../../shared/input/input.component';
 export default (props) => {
-  return <div className="item-title">
-    <input className="form-control"
-           type="text"
-           value={props.title}
-           onChange={(ev) => this.nameChangeHandler(ev)}
-    />
-  </div>
+
+  return (
+    <div className="item-title">
+      <Input value={props.title}
+             callback={props.callback}/>
+    </div>
+  )
 }

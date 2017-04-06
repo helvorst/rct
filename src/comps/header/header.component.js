@@ -1,5 +1,5 @@
 import React  from 'react';
-import Search from '../search/search.component';
+import Search from '../../shared/search/search.component';
 import './header.css';
 export default class Header extends React.Component {
     render(){

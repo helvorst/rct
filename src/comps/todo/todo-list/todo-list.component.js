@@ -1,43 +1,33 @@
 import React from 'react';
 import './todo-list.styles.css';
+import Todo from '../todo/todo.component';
 
 export default class TodoList extends React.Component {
 
-  done = (ev) => {
-    let todo = this.props.todo;
-    todo.done = ev.target.checked;
-    this.props.actions.onSaveTodo(todo);
+  edit = (todo) => {
+    let target = this.props.todos.find(x => x === todo);
+    target = todo;
+   this.props.actions.setTodods(this.props.todos);
+  };
+
+  actions = {
+    mark: this.edit,
+    edit: this.props.actions.edit
   };
 
   render() {
-    if(!this.props.todos.length){
+
+    if (!this.props.todos.length) {
       return <div>no todos</div>
     }
-    const renderTodos = () => this.props.todos.map(this.createItem.bind(this));
+
+    const renderTodo = (item) => <Todo item={item}
+                                       actions={this.actions}
+                                       key={item.id}/>;
+
+    const renderTodos = () => this.props.todos.map(renderTodo);
 
     return <ul className="list-group">{renderTodos()}</ul>;
   }
 
-  createItem(item) {
-
-      return <li className={"list-group-item " + (this.props.todo === item ? 'selected' : '')}
-                 key={item.id}
-                 onClick={() => this.props.actions.onSetTodo(item)}>
-        <div className="row">
-          <div className="pull-left">
-            <div>
-              <input type="checkbox" value={item.done} checked={item.done} onChange={ev => this.done(ev)}/>
-              {item.name}
-            </div>
-            <div className="description">
-              {item.description}
-            </div>
-          </div>
-          <div className="pull-right">
-            <a onClick={() => this.props.actions.onEditTodo(item)}><i className="fa fa-edit"></i></a>
-          </div>
-        </div>
-      </li>
-
-  }
 }
