@@ -7,7 +7,7 @@ export default class TodoList extends React.Component {
   edit = (todo) => {
     let target = this.props.todos.find(x => x === todo);
     target = todo;
-   this.props.actions.setTodods(this.props.todos);
+    this.props.actions.setTodods(this.props.todos);
   };
 
   actions = {
@@ -25,9 +25,31 @@ export default class TodoList extends React.Component {
                                        actions={this.actions}
                                        key={item.id}/>;
 
-    const renderTodos = () => this.props.todos.map(renderTodo);
+    const renderTodos = () => {
+      let list = this.props.todos
+        .filter(todo => todo.category === this.props.category.id);
 
-    return <ul className="list-group">{renderTodos()}</ul>;
+      if (this.props.filter) {
+        list = list.filter(x => {
+          const doneCriteria = this.props.filter.done
+            ? x.done === this.props.filter.done
+            : true;
+          const nameCriteria = this.props.filter.value
+            ? x.name.toLowerCase().indexOf(this.props.filter.value.toLowerCase()) > -1
+            : true;
+          return doneCriteria && nameCriteria;
+        })
+      }
+
+      return list.length > 0
+        ? list.map(renderTodo)
+        : <div>no todos in this category</div>
+    };
+
+    return (
+      <ul className="list-group">
+        {renderTodos()}
+      </ul>);
   }
 
 }

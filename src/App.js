@@ -38,15 +38,18 @@ class App extends React.Component {
     this.state = {
       categories: categories,
       todos: todos,
-      isEdit: false,
-      category: categories[0]
+      isEditTodo: false,
+      category: categories[0],
+      todo: null,
+      filter: null
     };
 
     this.actions = {
       setCategories: this.setCategories,
       setTodods: this.setTodos,
       selectCategory: this.selectCategory,
-      edit: this.edit
+      edit: this.edit,
+      setFilter: this.setFilter
     }
   }
 
@@ -69,16 +72,23 @@ class App extends React.Component {
   };
 
   edit = (todo) => {
-    this.setState({
-      isEdit: true
-    });
+    this.setState(prev => ({
+      isEditTodo: !prev.isEditTodo,
+      todo: todo ? todo : null
+    }));
   };
 
+  setFilter = (params) => {
+    this.setState({
+      filter: params
+    })
+  };
 
   render() {
 
-    const content = this.state.isEdit
-      ? <Edit/>
+    const content = this.state.isEditTodo
+      ? <Edit {...this.state}
+              actions={this.actions}/>
       : <View {...this.state}
               actions={this.actions}/>;
 

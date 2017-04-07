@@ -1,7 +1,8 @@
 import React from 'react';
+import './chekbox.styles.css';
 
 export default class Checkbox extends React.Component {
-  constructor(props){
+  constructor(props) {
     super(props);
     this.state = {
       value: this.props.value
@@ -18,10 +19,13 @@ export default class Checkbox extends React.Component {
 
   render() {
     return (
-      <input type="checkbox"
-             value={this.state.value}
-             checked={this.state.value}
-             onChange={ev => this.check(ev)}/>
+      <div className="checkbox-x">
+        <input type="checkbox"
+               value={this.state.value}
+               checked={this.state.value}
+               onChange={ev => this.check(ev)}/>
+        <label>{this.props.label}</label>
+      </div>
     )
   }
 }

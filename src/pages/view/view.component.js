@@ -1,52 +1,59 @@
 import React from 'react';
 import Header from '../../comps/header/header.component';
 import Progress from "../../shared/progress/progress.component";
-import AddNew from '../../comps/add-new/add-new.component';
+import CategoryAdd from '../../comps/category/category-add/category-add.component';
+import TodoAdd from '../../comps/todo/todo-add/todo-add.component';
 import CategoryList from '../../comps/category/category-list/category-list.component';
 import TodoList from '../../comps/todo/todo-list/todo-list.component';
+import Search from '../../shared/search/search.component';
 
-export default class View extends React.Component {
+export default (props) => {
 
-
-  render() {
-    const header = (
-      <div>
-        <Header/>
-        <Progress />
-      </div>);
-
-    const add = (
+  const header = (
+    <div>
       <div className="row">
-        <div className="col-sm-6"><AddNew for="category"/></div>
-        <div className="col-sm-6"><AddNew for="todo" /></div>
+        <div className="col-sm-6">
+          <Header/>
+        </div>
+        <div className="col-sm-6">
+          <Search actions={props.actions}/>
+        </div>
       </div>
-    );
+      <Progress />
+    </div>);
 
-    const left = (
+  const add = (
+    <div className="row">
       <div className="col-sm-6">
-        <CategoryList categories={this.props.categories}
-                      category={this.props.category}
-                      actions={this.props.actions}/>
+        <CategoryAdd actions={props.actions}
+                     categories={props.categories}/>
       </div>
-
-    );
-
-    const right = (
       <div className="col-sm-6">
-        <TodoList todos={this.props.todos}
-                  actions={this.props.actions}/>
+        <TodoAdd actions={props.actions}
+                 category={props.category}
+                 todos={props.todos}/>
       </div>
-    );
+    </div>
+  );
 
-    return (
-      <div className="App">
+  const left = (
+    <div className="col-sm-6">
+      <CategoryList {...props}/>
+    </div>
 
-        {header}
+  );
 
-        {add}
+  const right = (
+    <div className="col-sm-6">
+      <TodoList {...props}/>
+    </div>
+  );
 
-        {left} {right}
-
-      </div>);
-  }
+  return (
+    <div>
+      {header}
+      {add}
+      {left} {right}
+    </div>
+  );
 }

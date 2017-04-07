@@ -8,7 +8,7 @@ export default class Category extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      isEdit: false,
+      isEditCategory: false,
       title: ''
     };
 
@@ -24,13 +24,13 @@ export default class Category extends React.Component {
 
   editOn = () => {
     this.setState({
-      isEdit: true
+      isEditCategory: true
     })
   };
 
   editOff = (save) => {
     this.setState({
-      isEdit: false
+      isEditCategory: false
     });
     if (save) {
       this.props.actions.edit(this.props.item, this.state.title)
@@ -47,7 +47,9 @@ export default class Category extends React.Component {
 
   remove = () => this.props.actions.remove(this.props.item);
 
-  add = () => this.props.actions.add('New Category', this.props.item.id);
+  add = () => this.props.actions.add('...new subcategory', this.props.item.id);
+
+  assign = () => this.props.actions.assign(this.props.item);
 
   render() {
 
@@ -56,44 +58,58 @@ export default class Category extends React.Component {
     const style = {
       marginLeft: this.props.depth * 20
     };
-    const controlsDescription = [
+    const controlsDescriptionView = [
       {
         name: 'edit',
-        classes: 'fa fa-edit',
-        handler: this.actions.editOn
+        classesI: 'fa fa-edit',
+        callback: this.actions.editOn
       },
       {
         name: 'remove',
-        classes: 'fa fa-trash',
-        handler: this.actions.remove
+        classesI: 'fa fa-trash',
+        callback: this.actions.remove
       },
       {
         name: 'add_subcategory',
-        classes: 'fa fa-plus',
-        handler: this.actions.add
+        classesI: 'fa fa-plus',
+        callback: this.actions.add
       }
     ];
-    const controlsDescriptionEdit = [
+    const controlsDescriptionEditCategory = [
       {
         name: 'save',
-        classes: 'fa fa-check',
-        handler: () => this.actions.editOff(true)
+        classesI: 'fa fa-check',
+        callback: () => this.actions.editOff(true)
       },
       {
         name: 'cancel',
-        classes: 'fa fa-times',
-        handler: () => this.actions.editOff()
+        classesI: 'fa fa-times',
+        callback: () => this.actions.editOff()
       }
     ];
 
-    const body = this.state.isEdit
+    const controlsDescriptionEditTodo = [
+      {
+        name: 'assign',
+        classesI: 'fa fa-mail-reply',
+        callback: () => this.assign()
+      }
+    ];
+
+    let controlsDescription = controlsDescriptionView;
+    if (this.props.isEditTodo) {
+      controlsDescription = controlsDescriptionEditTodo;
+    } else if (this.state.isEditCategory) {
+      controlsDescription = controlsDescriptionEditCategory;
+    }
+
+    const body = this.state.isEditCategory
       ? <CategoryEdit title={this.props.item.name}
                       callback={this.actions.edit}/>
       : <CategoryTitle title={this.props.item.name}
                        callback={this.actions.select}/>;
-    const controls = this.state.isEdit
-      ? <Controls controls={controlsDescriptionEdit}/>
-      : <Controls controls={controlsDescription}/>;
+
+    const controls = <Controls controls={controlsDescription}/>;
 
     return (
       <div className={classes.join(' ')} style={style}>

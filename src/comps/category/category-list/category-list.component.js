@@ -14,7 +14,8 @@ export default class CategoryList extends React.Component {
       edit: this.editCategory,
       select: this.props.actions.selectCategory,
       remove: this.removeCategory,
-      add: this.addCategory
+      add: this.addCategory,
+      assign: this.assignCategory
     };
   }
 
@@ -45,13 +46,21 @@ export default class CategoryList extends React.Component {
     this.props.actions.setCategories(this.props.categories);
   };
 
+  assignCategory = (category) => {
+    // this.props.todo.category = category.id;
+    // this.props.actions.setTodods(this.props.todos);
+    this.props.actions.selectCategory(category);
+  };
+
   render() {
 
     const itemRender = (item, depth) => {
       return <Category item={item}
                        depth={depth}
+                       todo={this.props.todo}
                        category={this.props.category}
                        actions={this.actions}
+                       isEditTodo={this.props.isEditTodo}
                        key={item.id}/>
     };
 

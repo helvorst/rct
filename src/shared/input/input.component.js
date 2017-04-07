@@ -7,6 +7,7 @@ export default class Input extends React.Component {
       value: this.props.value
     }
   }
+
   update = (ev) => {
     const title = ev.target.value;
     this.setState({
@@ -15,11 +16,13 @@ export default class Input extends React.Component {
     this.props.callback(title);
   };
 
-  render () {
-    return <input className="form-control"
-           type="text"
-           value={this.state.value}
-           onChange={(ev) => this.update(ev)}/>
+  render() {
+    return <input
+      className="form-control"
+      type="text"
+      placeholder={this.props.placeholder}
+      value={this.state.value}
+      onChange={(ev) => this.update(ev)}/>
   }
 
 }

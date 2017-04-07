@@ -18,8 +18,8 @@ export default class Todo extends React.Component {
     const controls = [
       {
         name: 'edit',
-        classes: 'fa fa-edit',
-        handler: this.edit
+        classesI: 'fa fa-edit',
+        callback: this.edit
       }
     ];
 
@@ -28,9 +28,9 @@ export default class Todo extends React.Component {
 
         <div className="todo-body">
           <div className="todo-body__title">
-            <Checkbox value={this.props.item.done}
+            <Checkbox label={this.props.item.name}
+                      value={this.props.item.done}
                       callback={this.mark}/>
-            {this.props.item.name}
           </div>
           <Controls controls={controls}/>
         </div>

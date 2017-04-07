@@ -1,49 +1,25 @@
 import React  from 'react';
+import Checkbox from '../checkbox/checkbox.component';
+import Input from '../input/input.component';
 import './search.css';
 
-export default class Search extends React.Component {
-    constructor(props) {
-        super(props);
-        this.state = {
-            str: '',
-            chk: false
-        }
-    }
+let value ='';
+let checked = false;
 
-    onCheckHandler = (ev) => {
-        this.setState({
-            chk: ev.target.checked
-        });
-        this.props.actions.onSearch(this.state.str, this.state.chk);
-    };
+export default (props) => {
 
-    onChangeHandler = (ev) => {
-        const str = ev.target.value;
-        this.setState({
-            str: str
-        });
-        this.props.actions.onSearch(str)
-    };
 
-    render() {
-        return ( <div className="search">
-                  <div>
-                      <label className="control-label">Show done</label>
-                      <input type="checkbox"
-                             id="show-done"
-                             value={this.state.chk}
-                             checked={this.state.chk}
-                             onChange={ev => this.onCheckHandler(ev)}/>
-                  </div>
+  const search = () => props.actions.setFilter({value: value, done: checked});
 
-                  <div>
-                      <input className="form-control"
-                             type="text"
-                             placeholder="Search..."
-                             value={this.state.str}
-                             onChange={ev => this.onChangeHandler(ev)}/>
-                  </div>
-              </div>
-        )
-    }
+  return (
+    <div className="search">
+      <Checkbox label="Show done"
+                value={checked}
+                callback={val => {checked = val; search()}}/>
+      <Input value={value}
+             placeholder="Search"
+             callback={val => {value = val; search()}}/>
+
+    </div>
+  )
 }
