@@ -6,21 +6,11 @@ import TodoAdd from '../../comps/todo/todo-add/todo-add.component';
 import CategoryList from '../../comps/category/category-list/category-list.component';
 import TodoList from '../../comps/todo/todo-list/todo-list.component';
 import Search from '../../shared/search/search.component';
-
+import Link from 'react-router';
 export default (props) => {
 
   const header = (
-    <div>
-      <div className="row">
-        <div className="col-sm-6">
-          <Header/>
-        </div>
-        <div className="col-sm-6">
-          <Search actions={props.actions}/>
-        </div>
-      </div>
-      <Progress />
-    </div>);
+          <Progress/>);
 
   const add = (
     <div className="row">

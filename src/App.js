@@ -1,9 +1,12 @@
 import React from 'react';
+import {Router, Route, browserHistory, IndexRedirect, Link} from 'react-router';
 import './App.css';
 import View from './pages/view/view.component';
 import Edit from './pages/edit/edit.component';
+import Header from './comps/header/header.component';
+import Search from './shared/search/search.component';
 
-const {Map, List, fromJS} = require('immutable');
+//const {Map, List, fromJS} = require('immutable');
 
 let categories = [
   {id: 0, name: "Category 1 Clean", parent: null},
@@ -86,15 +89,33 @@ class App extends React.Component {
 
   render() {
 
-    const content = this.state.isEditTodo
-      ? <Edit {...this.state}
-              actions={this.actions}/>
-      : <View {...this.state}
-              actions={this.actions}/>;
-
     return (
-      <div className="App">{content}</div>
-    );
+          <div className="App">
+
+            <div className="row">
+              <div className="col-sm-6">
+                <Header/>
+              </div>
+              <div className="col-sm-6">
+                <Search actions={this.actions}/>
+              </div>
+            </div>
+
+            <Router history={browserHistory} key={Math.random()}>
+
+              <Route path="/"
+                     component={() => <View  {...this.state}
+                                             actions={this.actions}/>}></Route>
+
+              <Route path="/edit/:category/:todo"
+                     component={(params) => <Edit {...this.state}
+                                            actions={this.actions}
+                                                  {...params}/>}></Route>
+
+            </Router>
+
+
+          </div>);
   }
 }
 export default App;

@@ -1,7 +1,7 @@
 import React  from 'react';
 import Checkbox from '../checkbox/checkbox.component';
 import Input from '../input/input.component';
-import './search.css';
+import './search.styles.less';
 
 let value ='';
 let checked = false;
@@ -12,7 +12,7 @@ export default (props) => {
   const search = () => props.actions.setFilter({value: value, done: checked});
 
   return (
-    <div className="search">
+    <div className="search-component">
       <Checkbox label="Show done"
                 value={checked}
                 callback={val => {checked = val; search()}}/>

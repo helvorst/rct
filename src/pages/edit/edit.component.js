@@ -22,7 +22,6 @@ export default (props) => {
 
   return (
     <div>
-      <Header/>
       {left}
       {right}
     </div>

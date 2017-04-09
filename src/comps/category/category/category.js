@@ -1,8 +1,8 @@
 import React from 'react';
-import './category.styles.css';
 import Controls from '../../../shared/controls/controls.component';
 import CategoryTitle from './category-title';
 import CategoryEdit from './category-edit';
+import './category.styles.css';
 
 export default class Category extends React.Component {
   constructor(props) {
@@ -53,7 +53,7 @@ export default class Category extends React.Component {
 
   render() {
 
-    const classes = ['item'];
+    const classes = ['category-component'];
     classes.push(this.props.item === this.props.category ? 'selected' : null);
     const style = {
       marginLeft: this.props.depth * 20

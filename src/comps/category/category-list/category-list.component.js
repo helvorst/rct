@@ -19,6 +19,16 @@ export default class CategoryList extends React.Component {
     };
   }
 
+  componentDidMount() {
+    if(this.props.params.category) {
+      const categoryId = +this.props.params.category;
+      if (categoryId !== this.props.category.id) {
+        const c = this.props.categories.find(x => x.id === categoryId);
+        this.actions.select(c);
+      }
+    }
+  }
+
   editCategory = (category, name) => {
     const target = this.props.categories.find(it => it === category);
     target.name = name;

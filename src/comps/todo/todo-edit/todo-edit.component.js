@@ -3,18 +3,22 @@ import Button from '../../../shared/button/button.component';
 import Input from '../../../shared/input/input.component';
 import Checkbox from '../../../shared/checkbox/checkbox.component';
 import Textarea from '../../../shared/textarea/textarea.component';
-import './todo-edit.styles.css';
 
 export default class TodoEdit extends React.Component {
   constructor(props) {
     super(props);
+    const todoId = props.params.todo;
+    this.todo = props.todos.find(x=>x.id === +todoId);
+
     this.state = {
-      todo: {...this.props.todo}
+      todo: {...this.todo}
     };
   }
 
   changeName = (name) => {
-    this.state.todo.name = name;
+    this.setState({
+        todo: {...this.state.todo, name}
+    })
   };
 
   changeDone = (done) => {
@@ -27,17 +31,14 @@ export default class TodoEdit extends React.Component {
 
   save = (save) => {
     if (save) {
-      let target = this.props.todos.find(x => x === this.props.todo);
-      //target = this.state.todo;
-      Object.assign(target, this.state.todo);
-      target.category = this.props.category.id;
+      Object.assign(this.todo, this.state.todo);
+      this.todo.category =  this.props.category.id;
       this.props.actions.setTodods(this.props.todos);
     }
     this.props.actions.edit();
   };
 
   render() {
-
     const btns = {
       save: {
         name: 'save',
@@ -55,7 +56,7 @@ export default class TodoEdit extends React.Component {
 
     return (
 
-      <div className="todo-edit">
+      <div>
 
         <div>
           <Button {...btns.save}/>

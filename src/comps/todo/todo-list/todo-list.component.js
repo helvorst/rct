@@ -23,6 +23,7 @@ export default class TodoList extends React.Component {
 
     const renderTodo = (item) => <Todo item={item}
                                        actions={this.actions}
+                                       category={this.props.category}
                                        key={item.id}/>;
 
     const renderTodos = () => {

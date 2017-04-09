@@ -1,7 +1,7 @@
 import React from 'react';
 
 export default (props) => {
-  return <div className="item-title"
+  return <div className="category-title"
               onClick={() => props.callback()}>
     {props.title}
   </div>
