@@ -1,0 +1,5 @@
+.checkbox-x {
+    margin: 0 5px;
+    display: flex;
+    flex-direction: row;
+}

@@ -1,0 +1,6 @@
+.category-controls {
+  float: right;
+}
+.selected {
+  background-color: lightskyblue;
+}

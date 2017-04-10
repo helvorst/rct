@@ -1,0 +1,9 @@
+.todo-description {
+    font-size: small;
+}
+.todo-body {
+    display: flex;
+}
+.todo-body__title {
+    flex: 1;
+}
