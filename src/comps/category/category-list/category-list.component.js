@@ -1,6 +1,7 @@
 import React from 'react';
 import './category-list.styles.css';
 import Category from '../category/category';
+import InputBtn from '../../../shared/input-button/input-button.component';
 
 export default class CategoryList extends React.Component {
   constructor(props) {
@@ -11,55 +12,62 @@ export default class CategoryList extends React.Component {
     };
 
     this.actions = {
-      edit: this.editCategory,
-      select: this.props.actions.selectCategory,
-      remove: this.removeCategory,
-      add: this.addCategory,
-      assign: this.assignCategory
+      select: this.select,
+      edit: this.edit,
+      remove: this.remove,
+      add: this.add,
+      assign: this.assign,
+      setList: this.setList
     };
   }
 
   componentDidMount() {
-    if(this.props.params.category) {
+    if (this.props.params) {
       const categoryId = +this.props.params.category;
       if (categoryId !== this.props.category.id) {
-        const c = this.props.categories.find(x => x.id === categoryId);
+        const c = this.props.list.find(x => x.id === categoryId);
         this.actions.select(c);
       }
     }
   }
 
-  editCategory = (category, name) => {
-    const target = this.props.categories.find(it => it === category);
-    target.name = name;
-    this.props.actions.setCategories(this.props.categories);
+  setList = () => {
+    this.props.actions.set(this.props.list);
   };
 
-  removeCategory = (category) => {
+  select = (item) => {
+    this.props.actions.select(item);
+  };
+
+  edit = (item, name) => {
+    const target = this.props.list.find(it => it === item);
+    target.name = name;
+    this.setList();
+  };
+
+  remove = (item) => {
     const lookup = (list, cat) => {
-      const ind = list.indexOf(cat)
+      const ind = list.indexOf(cat);
       list.splice(ind, 1);
       const subs = list.filter(it => it.parent === cat.id);
       subs.map(s => lookup(list, s));
     };
-    lookup(this.props.categories, category);
-    this.props.actions.setCategories(this.props.categories);
+    lookup(this.props.list, item);
+    this.setList();
   };
 
-  addCategory = (name, parentId) => {
-    const category = {
+  add = (name, parentId) => {
+    const item = {
       name: name,
-      id: this.props.categories.length,
+      id: this.props.list.length,
       parent: parentId
     };
-    this.props.categories.unshift(category);
-    this.props.actions.setCategories(this.props.categories);
+    this.props.list.unshift(item);
+    this.setList();
   };
 
-  assignCategory = (category) => {
-    // this.props.todo.category = category.id;
-    // this.props.actions.setTodods(this.props.todos);
-    this.props.actions.selectCategory(category);
+  assign = (item) => {
+    this.select(item)
   };
 
   render() {
@@ -67,8 +75,8 @@ export default class CategoryList extends React.Component {
     const itemRender = (item, depth) => {
       return <Category item={item}
                        depth={depth}
-                       todo={this.props.todo}
-                       category={this.props.category}
+                       todo={this.props.listContent}
+                       category={this.props.active}
                        actions={this.actions}
                        isEditTodo={this.props.isEditTodo}
                        key={item.id}/>
@@ -88,7 +96,11 @@ export default class CategoryList extends React.Component {
 
     return (
       <div>
-        {listRender(this.props.categories, null)}
+        <InputBtn
+          callback={name => this.add(name, null)}
+          placeholder="Add fuckencategory"/>
+
+        {listRender(this.props.list, null)}
       </div>
     )
   }

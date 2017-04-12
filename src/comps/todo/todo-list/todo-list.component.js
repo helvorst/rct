@@ -1,13 +1,28 @@
 import React from 'react';
 import './todo-list.styles.css';
 import Todo from '../todo/todo.component';
+import InputBtn from '../../../shared/input-button/input-button.component';
 
 export default class TodoList extends React.Component {
 
-  edit = (todo) => {
-    let target = this.props.todos.find(x => x === todo);
-    target = todo;
-    this.props.actions.setTodods(this.props.todos);
+  setList = () => {
+    this.props.actions.set(this.props.list);
+  };
+
+  edit = (item) => {
+    let target = this.props.list.find(x => x === item);
+    target = item;
+    this.setList();
+  };
+
+  add = (name) => {
+    const item = {
+      name: name,
+      id: this.props.list.length,
+      category: this.props.category.id
+    };
+    this.props.list.unshift(item);
+    this.setList();
   };
 
   actions = {
@@ -17,8 +32,8 @@ export default class TodoList extends React.Component {
 
   render() {
 
-    if (!this.props.todos.length) {
-      return <div>no todos</div>
+    if (!this.props.list.length) {
+      return <div>no items</div>
     }
 
     const renderTodo = (item) => <Todo item={item}
@@ -26,9 +41,9 @@ export default class TodoList extends React.Component {
                                        category={this.props.category}
                                        key={item.id}/>;
 
-    const renderTodos = () => {
-      let list = this.props.todos
-        .filter(todo => todo.category === this.props.category.id);
+    const renderList = () => {
+      let list = this.props.list
+        .filter(x => x.category === this.props.category.id);
 
       if (this.props.filter) {
         list = list.filter(x => {
@@ -44,13 +59,19 @@ export default class TodoList extends React.Component {
 
       return list.length > 0
         ? list.map(renderTodo)
-        : <div>no todos in this category</div>
+        : <div>no items in this list</div>
     };
 
     return (
-      <ul className="list-group">
-        {renderTodos()}
-      </ul>);
+      <div>
+        <InputBtn
+          callback={name => this.add(name, null)}
+          placeholder="Add todo"/>
+
+        <ul className="list-group">
+          {renderList()}
+        </ul>
+      </div>);
   }
 
 }

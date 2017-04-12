@@ -9,7 +9,7 @@ let checked = false;
 export default (props) => {
 
 
-  const search = () => props.actions.setFilter({value: value, done: checked});
+  const search = () => props.callback({value: value, done: checked});
 
   return (
     <div className="search-component">

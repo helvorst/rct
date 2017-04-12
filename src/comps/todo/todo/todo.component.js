@@ -14,7 +14,7 @@ export default class Todo extends React.Component {
 
   edit = () => {
     this.props.router.push('/edit')
-  }// this.props.actions.edit(this.props.item);
+  };
 
   render() {
 

@@ -48,10 +48,15 @@ class App extends React.Component {
     };
 
     this.actions = {
-      setCategories: this.setCategories,
-      setTodods: this.setTodos,
-      selectCategory: this.selectCategory,
-      edit: this.edit,
+      category: {
+        set: this.setCategories,
+        select: this.selectCategory,
+      },
+      todo: {
+        set: this.setTodos,
+        edit: this.edit,
+      },
+
       setFilter: this.setFilter
     }
   }
@@ -97,7 +102,7 @@ class App extends React.Component {
                 <Header/>
               </div>
               <div className="col-sm-6">
-                <Search actions={this.actions}/>
+                <Search callback={this.actions.setFilter}/>
               </div>
             </div>
 

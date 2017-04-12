@@ -1,49 +1,34 @@
 import React from 'react';
-import Header from '../../comps/header/header.component';
 import Progress from "../../shared/progress/progress.component";
-import CategoryAdd from '../../comps/category/category-add/category-add.component';
-import TodoAdd from '../../comps/todo/todo-add/todo-add.component';
 import CategoryList from '../../comps/category/category-list/category-list.component';
 import TodoList from '../../comps/todo/todo-list/todo-list.component';
-import Search from '../../shared/search/search.component';
-import Link from 'react-router';
-export default (props) => {
+import pure from '../../func/pure';
+import Split from '../../shared/split/split.component';
+
+export default pure((props) => {
 
   const header = (
-          <Progress/>);
+    <Progress/>);
 
-  const add = (
-    <div className="row">
-      <div className="col-sm-6">
-        <CategoryAdd actions={props.actions}
-                     categories={props.categories}/>
-      </div>
-      <div className="col-sm-6">
-        <TodoAdd actions={props.actions}
-                 category={props.category}
-                 todos={props.todos}/>
-      </div>
-    </div>
-  );
+  const left = <CategoryList actions={props.actions.category}
+                             list={props.categories}
+                             listContent={props.todos}
+                             active={props.category}/>;
 
-  const left = (
-    <div className="col-sm-6">
-      <CategoryList {...props}/>
-    </div>
+  const right = <TodoList actions={props.actions.todo}
+                          list={props.todos}
+                          category={props.category}
+                          filter={props.filter}/>;
 
-  );
-
-  const right = (
-    <div className="col-sm-6">
-      <TodoList {...props}/>
-    </div>
+  const body = (
+    <Split left={left}
+           right={right}></Split>
   );
 
   return (
     <div>
       {header}
-      {add}
-      {left} {right}
+      {body}
     </div>
   );
-}
+})
