@@ -39,7 +39,8 @@ export default class TodoList extends React.Component {
     const renderTodo = (item) => <Todo item={item}
                                        actions={this.actions}
                                        category={this.props.category}
-                                       key={item.id}/>;
+                                       key={item.id}
+                                       routeInfo ={this.props.routeInfo}/>;
 
     const renderList = () => {
       let list = this.props.list
@@ -62,11 +63,18 @@ export default class TodoList extends React.Component {
         : <div>no items in this list</div>
     };
 
+    const addbtns = [{
+      name: 'add',
+      display: 'Add',
+      classesA: 'btn btn-primary',
+      callback: (name) => this.add(name, null)
+    }];
+
     return (
       <div>
         <InputBtn
-          callback={name => this.add(name, null)}
-          placeholder="Add todo"/>
+          placeholder="Add todo"
+          buttons={addbtns}/>
 
         <ul className="list-group">
           {renderList()}

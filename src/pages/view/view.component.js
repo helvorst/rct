@@ -7,18 +7,20 @@ import Split from '../../shared/split/split.component';
 
 export default pure((props) => {
 
-  const header = (
-    <Progress/>);
+  const header = <Progress list={props.todos}
+                           property="done"/>;
 
   const left = <CategoryList actions={props.actions.category}
                              list={props.categories}
                              listContent={props.todos}
-                             active={props.category}/>;
+                             active={props.category}
+                             routeInfo={props.routeInfo}/>;
 
   const right = <TodoList actions={props.actions.todo}
                           list={props.todos}
                           category={props.category}
-                          filter={props.filter}/>;
+                          filter={props.filter}
+                          routeInfo={props.routeInfo}/>;
 
   const body = (
     <Split left={left}

@@ -3,21 +3,19 @@ import Input from '../input/input.component';
 import Button from '../button/button.component';
 
 
-export default class InputBtn extends React.PureComponent  {
-  constructor(props){
+export default class InputBtn extends React.PureComponent {
+  constructor(props) {
     super(props);
     this.state = {
       value: props.value || ''
     }
   }
 
-  render() {
+  click = (fn) => {
+    fn(this.state.value);
+  };
 
-    const btn = {
-      name: 'add',
-      classesA: 'btn btn-primary',
-      callback: () => this.props.callback(this.state.value)
-    };
+  render() {
 
     return (
       <div className="input-group">
@@ -25,7 +23,9 @@ export default class InputBtn extends React.PureComponent  {
                value={this.state.value}
                callback={val => this.setState({value: val})}/>
         <span className="input-group-btn">
-            <Button {...btn}/>
+          {this.props.buttons.map((btn, ind) => <Button key={ind}
+                                                        {...btn}
+                                                        callback={() => this.click(btn.callback)}/>)}
       </span>
       </div>
     )

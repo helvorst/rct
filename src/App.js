@@ -1,10 +1,11 @@
 import React from 'react';
-import {Router, Route, browserHistory, IndexRedirect, Link} from 'react-router';
+import {Router, Route, browserHistory} from 'react-router';
 import './App.css';
 import View from './pages/view/view.component';
 import Edit from './pages/edit/edit.component';
 import Header from './comps/header/header.component';
 import Search from './shared/search/search.component';
+import Split from './shared/split/split.component';
 
 //const {Map, List, fromJS} = require('immutable');
 
@@ -41,7 +42,6 @@ class App extends React.Component {
     this.state = {
       categories: categories,
       todos: todos,
-      isEditTodo: false,
       category: categories[0],
       todo: null,
       filter: null
@@ -54,7 +54,7 @@ class App extends React.Component {
       },
       todo: {
         set: this.setTodos,
-        edit: this.edit,
+        edit: this.edit
       },
 
       setFilter: this.setFilter
@@ -62,7 +62,7 @@ class App extends React.Component {
   }
 
   componentDidMount() {
-    console.log(this.state)
+
   }
 
   setCategories = (categories) => {
@@ -79,13 +79,6 @@ class App extends React.Component {
     });
   };
 
-  edit = (todo) => {
-    this.setState(prev => ({
-      isEditTodo: !prev.isEditTodo,
-      todo: todo ? todo : null
-    }));
-  };
-
   setFilter = (params) => {
     this.setState({
       filter: params
@@ -94,33 +87,28 @@ class App extends React.Component {
 
   render() {
 
+    const headerLeft = <Header/>;
+    const headerRight = <Search callback={this.actions.setFilter}/>;
     return (
-          <div className="App">
+      <div className="App">
 
-            <div className="row">
-              <div className="col-sm-6">
-                <Header/>
-              </div>
-              <div className="col-sm-6">
-                <Search callback={this.actions.setFilter}/>
-              </div>
-            </div>
+        <Split left={headerLeft}
+               right={headerRight}/>
 
-            <Router history={browserHistory} key={Math.random()}>
+        <Router history={browserHistory} key={Math.random()}>
+          <Route path="/"
+                 component={(params) => <View  {...this.state}
+                                               actions={this.actions}
+                                               routeInfo={params}/>}></Route>
 
-              <Route path="/"
-                     component={() => <View  {...this.state}
-                                             actions={this.actions}/>}></Route>
+          <Route path="/edit/:category/:todo"
+                 component={(params) => <Edit {...this.state}
+                                              actions={this.actions}
+                                              routeInfo={params}/>}></Route>
 
-              <Route path="/edit/:category/:todo"
-                     component={(params) => <Edit {...this.state}
-                                            actions={this.actions}
-                                                  {...params}/>}></Route>
+        </Router>
 
-            </Router>
-
-
-          </div>);
+      </div>);
   }
 }
 export default App;

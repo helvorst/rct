@@ -1,7 +1,6 @@
 import React from 'react';
 
 export default (props) => {
-
     return <input
       className="form-control"
       type="text"

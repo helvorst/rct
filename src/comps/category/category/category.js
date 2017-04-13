@@ -1,16 +1,17 @@
 import React from 'react';
 import Controls from '../../../shared/controls/controls.component';
-import CategoryTitle from './category-title';
-import CategoryEdit from './category-edit';
 import './category.styles.css';
+import InputBtn from '../../../shared/input-button/input-button.component';
 
 export default class Category extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      isEditCategory: false,
-      title: ''
+      isEditCategory: false
     };
+
+    this.isEditTodo = this.props.routeInfo.params.category
+    && this.props.routeInfo.params.todo ? true : false;
 
     this.actions = {
       select: this.select,
@@ -33,21 +34,15 @@ export default class Category extends React.Component {
       isEditCategory: false
     });
     if (save) {
-      this.props.actions.edit(this.props.item, this.state.title)
+      this.props.actions.edit(this.props.item, save)
     }
   };
 
   select = () => this.props.actions.select(this.props.item);
 
-  edit = (title) => {
-    this.setState({
-      title: title
-    })
-  };
-
   remove = () => this.props.actions.remove(this.props.item);
 
-  add = () => this.props.actions.add('...new subcategory', this.props.item.id);
+  add = () => this.props.actions.add(null, this.props.item.id);
 
   assign = () => this.props.actions.assign(this.props.item);
 
@@ -58,63 +53,69 @@ export default class Category extends React.Component {
     const style = {
       marginLeft: this.props.depth * 20
     };
-    const controlsDescriptionView = [
+    const viewbtns = [
       {
         name: 'edit',
+        classesA: "btn btn-sm",
         classesI: 'fa fa-edit',
         callback: this.actions.editOn
       },
       {
         name: 'remove',
+        classesA: "btn btn-sm",
         classesI: 'fa fa-trash',
         callback: this.actions.remove
       },
       {
         name: 'add_subcategory',
+        classesA: "btn btn-sm",
         classesI: 'fa fa-plus',
         callback: this.actions.add
       }
     ];
-    const controlsDescriptionEditCategory = [
-      {
-        name: 'save',
-        classesI: 'fa fa-check',
-        callback: () => this.actions.editOff(true)
-      },
-      {
-        name: 'cancel',
-        classesI: 'fa fa-times',
-        callback: () => this.actions.editOff()
-      }
-    ];
 
-    const controlsDescriptionEditTodo = [
+    const todoEditBtns = [
       {
         name: 'assign',
+        classesA: "btn btn-sm",
         classesI: 'fa fa-mail-reply',
         callback: () => this.assign()
       }
     ];
 
-    let controlsDescription = controlsDescriptionView;
-    if (this.props.isEditTodo) {
-      controlsDescription = controlsDescriptionEditTodo;
-    } else if (this.state.isEditCategory) {
-      controlsDescription = controlsDescriptionEditCategory;
-    }
+    let controls = this.isEditTodo ? todoEditBtns : viewbtns;
 
-    const body = this.state.isEditCategory
-      ? <CategoryEdit title={this.props.item.name}
-                      callback={this.actions.edit}/>
-      : <CategoryTitle title={this.props.item.name}
-                       callback={this.actions.select}/>;
+    const editbtns = [
+      {
+        name: 'save',
+        classesA: 'btn btn-sm',
+        classesI: 'fa fa-check',
+        callback: (newname) => this.actions.editOff(newname)
+      },
+      {
+        name: 'cancel',
+        classesA: 'btn btn-sm',
+        classesI: 'fa fa-times',
+        callback: () => this.actions.editOff()
+      }
+    ];
 
-    const controls = <Controls controls={controlsDescription}/>;
+    const editor = <InputBtn
+      value={this.props.item.name}
+      buttons={editbtns}/>;
+
+    const viewer = (
+      <div className="category">
+        <div className="category-title"
+             onClick={() => this.select()}>
+          {this.props.item.name}
+        </div>
+        <Controls controls={controls}/>
+      </div>);
 
     return (
       <div className={classes.join(' ')} style={style}>
-        {body}
-        {controls}
+        {this.state.isEditCategory ? editor : viewer}
       </div>
     )
   }

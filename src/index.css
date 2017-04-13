@@ -10,3 +10,9 @@ input[type="checkbox"] {
 .row {
   margin: 5px 0;
 }
+.btn:hover,
+.btn:focus,
+.btn.focus {
+  color: black;
+  text-decoration: none;
+}

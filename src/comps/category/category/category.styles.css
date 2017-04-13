@@ -1,11 +1,13 @@
 .category-component {
-    align-items: center;
     padding: 10px;
-    display: flex;
     border: 1px solid #dddddd;
 }
 .item--sub {
     margin-left: 20px;
+}
+.category {
+    align-items: center;
+    display: flex;
 }
 .category-title {
     flex: 1;

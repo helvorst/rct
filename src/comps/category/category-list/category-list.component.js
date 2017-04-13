@@ -6,10 +6,6 @@ import InputBtn from '../../../shared/input-button/input-button.component';
 export default class CategoryList extends React.Component {
   constructor(props) {
     super(props);
-    this.state = {
-      edit: null,
-      name: ''
-    };
 
     this.actions = {
       select: this.select,
@@ -22,13 +18,6 @@ export default class CategoryList extends React.Component {
   }
 
   componentDidMount() {
-    if (this.props.params) {
-      const categoryId = +this.props.params.category;
-      if (categoryId !== this.props.category.id) {
-        const c = this.props.list.find(x => x.id === categoryId);
-        this.actions.select(c);
-      }
-    }
   }
 
   setList = () => {
@@ -58,7 +47,7 @@ export default class CategoryList extends React.Component {
 
   add = (name, parentId) => {
     const item = {
-      name: name,
+      name: name ? name : "new cat",
       id: this.props.list.length,
       parent: parentId
     };
@@ -78,8 +67,8 @@ export default class CategoryList extends React.Component {
                        todo={this.props.listContent}
                        category={this.props.active}
                        actions={this.actions}
-                       isEditTodo={this.props.isEditTodo}
-                       key={item.id}/>
+                       key={item.id}
+                       routeInfo={this.props.routeInfo}/>
     };
 
     const listRender = (list, parent, depth = 0) => {
@@ -94,11 +83,18 @@ export default class CategoryList extends React.Component {
       }))(depth);
     };
 
+    const addbtns = [{
+      name: 'add',
+      display: 'Add',
+      classesA: 'btn btn-primary',
+      callback: (name) => this.add(name, null)
+    }];
+
     return (
       <div>
         <InputBtn
-          callback={name => this.add(name, null)}
-          placeholder="Add fuckencategory"/>
+          placeholder="Add fuckencategory"
+          buttons={addbtns}/>
 
         {listRender(this.props.list, null)}
       </div>

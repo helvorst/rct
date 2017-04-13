@@ -7,7 +7,7 @@ import Textarea from '../../../shared/textarea/textarea.component';
 export default class TodoEdit extends React.Component {
   constructor(props) {
     super(props);
-    const todoId = props.params.todo;
+    const todoId = props.routeInfo.params.todo;
     this.todo = props.todos.find(x=>x.id === +todoId);
 
     this.state = {
@@ -22,37 +22,43 @@ export default class TodoEdit extends React.Component {
   };
 
   changeDone = (done) => {
-    this.state.todo.done = done;
+    this.setState({
+      todo: {...this.state.todo, done}
+    })
   };
 
-  changeDescription = (desc) => {
-    this.state.todo.description = desc;
+  changeDescription = (description) => {
+    this.setState({
+      todo: {...this.state.todo, description}
+    })
   };
 
   save = (save) => {
     if (save) {
       Object.assign(this.todo, this.state.todo);
       this.todo.category =  this.props.category.id;
-      this.props.actions.setTodods(this.props.todos);
+      this.props.actions.set(this.props.todos);
     }
-    this.props.actions.edit();
+    this.props.routeInfo.router.push('/');
   };
 
   render() {
     const btns = {
       save: {
         name: 'save',
+        display: 'Save',
         callback: () => this.save(true),
         classesA: 'btn btn-success'
       },
       cancel: {
         name: 'cancel',
+        display: 'Cancel',
         callback: () => this.save(),
         classesA: 'btn btn-warning'
       }
     };
 
-    //const findCategoryName = () => this.props.categories.find(x => x.id === this.props.todo.category).name;
+    //const findCategoryName = () => this.props.categories.find(click => click.id === this.props.todo.category).name;
 
     return (
 
