@@ -2,84 +2,79 @@ import React from 'react';
 import './todo-list.styles.css';
 import Todo from '../todo/todo.component';
 import InputBtn from '../../../shared/input-button/input-button.component';
+import {connect} from 'react-redux';
+import {addTodo} from '../../../actions';
 
-export default class TodoList extends React.Component {
+let TodoList = (props) => {
 
-  setList = () => {
-    this.props.actions.set(this.props.list);
-  };
-
-  edit = (item) => {
-    let target = this.props.list.find(x => x === item);
-    target = item;
-    this.setList();
-  };
-
-  add = (name) => {
+  const add = (name) => {
     const item = {
       name: name,
-      id: this.props.list.length,
-      category: this.props.category.id
+      id: props.todos.length,
+      done: false,
+      category: props.category
     };
-    this.props.list.unshift(item);
-    this.setList();
+    props.dispatch(addTodo(item))
   };
 
-  actions = {
-    mark: this.edit,
-    edit: this.props.actions.edit
-  };
+  const renderTodo = (item) => <Todo item={item}
+                                     key={item.id}
+                                     {...props}/>;
 
-  render() {
+  const renderList = () => {
+    let list = props.todos
+      .filter(x => {
+        return x.category === props.category
+      });
 
-    if (!this.props.list.length) {
-      return <div>no items</div>
+    if (props.filter) {
+      list = list.filter(x => {
+        const doneCriteria = props.filter.done
+          ? x.done === props.filter.done
+          : true;
+        const nameCriteria = props.filter.search
+          ? x.name.toLowerCase().indexOf(props.filter.search.toLowerCase()) > -1
+          : true;
+        return doneCriteria && nameCriteria;
+      })
     }
 
-    const renderTodo = (item) => <Todo item={item}
-                                       actions={this.actions}
-                                       category={this.props.category}
-                                       key={item.id}
-                                       routeInfo ={this.props.routeInfo}/>;
+    return list.length > 0
+      ? list.map(renderTodo)
+      : <div>no items in this list</div>
+  };
 
-    const renderList = () => {
-      let list = this.props.list
-        .filter(x => x.category === this.props.category.id);
+  const addbtns = [{
+    name: 'add',
+    display: 'Add',
+    classesA: 'btn btn-primary',
+    callback: (name) => add(name, null)
+  }];
 
-      if (this.props.filter) {
-        list = list.filter(x => {
-          const doneCriteria = this.props.filter.done
-            ? x.done === this.props.filter.done
-            : true;
-          const nameCriteria = this.props.filter.value
-            ? x.name.toLowerCase().indexOf(this.props.filter.value.toLowerCase()) > -1
-            : true;
-          return doneCriteria && nameCriteria;
-        })
-      }
-
-      return list.length > 0
-        ? list.map(renderTodo)
-        : <div>no items in this list</div>
-    };
-
-    const addbtns = [{
-      name: 'add',
-      display: 'Add',
-      classesA: 'btn btn-primary',
-      callback: (name) => this.add(name, null)
-    }];
-
-    return (
-      <div>
-        <InputBtn
-          placeholder="Add todo"
-          buttons={addbtns}/>
-
-        <ul className="list-group">
-          {renderList()}
-        </ul>
-      </div>);
+  if (!props.todos.length) {
+    return <div>no items</div>
   }
+  else  return (
+    <div>
+      <InputBtn
+        placeholder="Add todo"
+        buttons={addbtns}/>
 
-}
+      <ul className="list-group">
+        {renderList()}
+      </ul>
+    </div>);
+
+};
+
+
+const mapStateToProps = (state, ownProps) => ({
+  todos: state.todos,
+  category: state.category,
+  categories: state.categories,
+  filter: state.filter,
+  ...ownProps
+});
+
+TodoList = connect(mapStateToProps)(TodoList);
+export default TodoList;

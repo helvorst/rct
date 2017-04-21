@@ -13,21 +13,12 @@ export default pure((props) => {
   //     props.actions.category.select(c);
   //   }
   // }
-  const left = <CategoryList actions={props.actions.category}
-                             list={props.categories}
-                             listContent={props.todos}
-                             active={props.category}
-                             routeInfo={props.routeInfo}/>;
 
-  const right = <TodoEdit actions={props.actions.todo}
-                          todos={props.todos}
-                          category={props.category}
-                          filter={props.filter}
-                          routeInfo={props.routeInfo}/>;
 
   const body = (
-    <Split left={left}
-           right={right}></Split>
+    <Split left={<CategoryList {...props}/>}
+           right={<TodoEdit {...props}/>}>
+    </Split>
   );
 
   return (

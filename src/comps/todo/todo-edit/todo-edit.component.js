@@ -3,46 +3,42 @@ import Button from '../../../shared/button/button.component';
 import Input from '../../../shared/input/input.component';
 import Checkbox from '../../../shared/checkbox/checkbox.component';
 import Textarea from '../../../shared/textarea/textarea.component';
+import {connect} from 'react-redux';
+import {editTodo} from '../../../actions';
 
-export default class TodoEdit extends React.Component {
+class TodoEditClass extends React.Component {
   constructor(props) {
     super(props);
-    const todoId = props.routeInfo.params.todo;
+    const todoId = props.params.todo;
     this.todo = props.todos.find(x=>x.id === +todoId);
-
     this.state = {
       todo: {...this.todo}
     };
   }
-
   changeName = (name) => {
     this.setState({
         todo: {...this.state.todo, name}
     })
   };
-
   changeDone = (done) => {
     this.setState({
       todo: {...this.state.todo, done}
     })
   };
-
-  changeDescription = (description) => {
+  changeDesc = (description) => {
     this.setState({
       todo: {...this.state.todo, description}
     })
   };
-
   save = (save) => {
-    if (save) {
-      Object.assign(this.todo, this.state.todo);
-      this.todo.category =  this.props.category.id;
-      this.props.actions.set(this.props.todos);
+    if(save) {
+      this.state.todo.category = this.props.category;
+      this.props.dispatch(editTodo(this.state.todo));
     }
-    this.props.routeInfo.router.push('/');
+    this.props.router.push('/');
   };
 
-  render() {
+  render () {
     const btns = {
       save: {
         name: 'save',
@@ -58,10 +54,7 @@ export default class TodoEdit extends React.Component {
       }
     };
 
-    //const findCategoryName = () => this.props.categories.find(click => click.id === this.props.todo.category).name;
-
     return (
-
       <div>
 
         <div>
@@ -78,8 +71,17 @@ export default class TodoEdit extends React.Component {
 
 
         <Textarea value={this.state.todo.description}
-                  callback={this.changeDescription}/>
+                  callback={this.changeDesc}/>
 
       </div>)
   }
-}
+};
+
+const mapStateToProps = (state, ownProps) => ({
+  todos: state.todos,
+  category: state.category,
+  ...ownProps
+});
+
+const TodoEdit = connect(mapStateToProps)(TodoEditClass);
+export default TodoEdit;

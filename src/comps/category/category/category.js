@@ -10,8 +10,7 @@ export default class Category extends React.Component {
       isEditCategory: false
     };
 
-    this.isEditTodo = this.props.routeInfo.params.category
-    && this.props.routeInfo.params.todo ? true : false;
+    this.isEditTodo =  props.params && props.params.category;
 
     this.actions = {
       select: this.select,
@@ -29,27 +28,30 @@ export default class Category extends React.Component {
     })
   };
 
-  editOff = (save) => {
+  editOff = (name) => {
     this.setState({
       isEditCategory: false
     });
-    if (save) {
-      this.props.actions.edit(this.props.item, save)
+    if (name) {
+      this.props.actions.edit({...this.props.item, name: name})
     }
   };
 
-  select = () => this.props.actions.select(this.props.item);
 
-  remove = () => this.props.actions.remove(this.props.item);
+  // in view mode
+  select = () => this.props.actions.select(this.props.item.id);
+
+  remove = () => this.props.actions.remove(this.props.item.id);
 
   add = () => this.props.actions.add(null, this.props.item.id);
 
-  assign = () => this.props.actions.assign(this.props.item);
+  // in edit todo mode
+  assign = () => this.props.actions.select(this.props.item.id);
 
   render() {
 
     const classes = ['category-component'];
-    classes.push(this.props.item === this.props.category ? 'selected' : null);
+    classes.push(this.props.item.id === this.props.category ? 'selected' : null);
     const style = {
       marginLeft: this.props.depth * 20
     };

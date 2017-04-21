@@ -13,6 +13,7 @@ export default class InputBtn extends React.PureComponent {
 
   click = (fn) => {
     fn(this.state.value);
+    this.setState({value: ''});
   };
 
   render() {
