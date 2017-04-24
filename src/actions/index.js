@@ -1,20 +1,6 @@
 export * from './category_thunk';
+//export * from './todo_saga';
 
-
-export const fetchTodos = () => {
-  return (dispatch, getState) => {
-    return getState().todos
-      ? Promise.resolve()
-      : fetch('http://localhost:3001/todos')
-        .then(rsp => rsp.json())
-        .then(items => dispatch(setTodos(items)))
-  }
-};
-
-export const setTodos = (list) => ({
-  type: 'SET_TODOS',
-  list
-});
 
 export const addTodo = (todo) => ({
   type: 'ADD_TODO',
@@ -26,9 +12,9 @@ export const editTodo = (todo) => ({
   payload: todo
 });
 
-export const toggleTodo = (id) => ({
+export const toggleTodo = (todo) => ({
   type: 'TOGGLE_TODO',
-  id
+  payload: todo
 });
 
 export const selectCategory = (id) => ({

@@ -7,12 +7,12 @@
     },
     {
       "id": 1,
-      "name": "Clean sub-1",
+      "name": "Clean eadable",
       "parent": 0
     },
     {
       "id": 2,
-      "name": "Clean sub-2",
+      "name": "Clean divine",
       "parent": 0
     },
     {
@@ -22,12 +22,12 @@
     },
     {
       "id": 4,
-      "name": "Buy sub-1",
+      "name": "Buy eadable",
       "parent": 3
     },
     {
       "id": 5,
-      "name": "Buy sub-2",
+      "name": "Buy divine",
       "parent": 3
     },
     {
@@ -41,27 +41,12 @@
       "parent": null
     },
     {
-      "name": "ee",
-      "parent": null,
-      "id": 17
-    },
-    {
-      "name": "ebati",
-      "parent": null,
-      "id": 18
-    },
-    {
-      "name": "baba",
-      "parent": null,
-      "id": 21
-    },
-    {
       "name": "wash yr dirty",
       "parent": null,
       "id": 22
     },
     {
-      "name": "tydu",
+      "name": "imdying",
       "parent": null,
       "id": 23
     }
@@ -70,7 +55,7 @@
     {
       "id": 0,
       "name": "Clean windows",
-      "done": false,
+      "done": true,
       "description": "some desc",
       "category": 0
     },
@@ -86,7 +71,7 @@
       "name": "Clean house",
       "done": false,
       "description": "some desc",
-      "category": 1
+      "category": 0
     },
     {
       "id": 3,
@@ -150,6 +135,99 @@
       "done": true,
       "description": "some desc",
       "category": 6
+    },
+    {
+      "name": "du",
+      "id": 12,
+      "done": false,
+      "category": 0
+    },
+    {
+      "name": "bist",
+      "id": 13,
+      "done": true,
+      "category": 0,
+      "description": "aka is"
+    },
+    {
+      "name": "so",
+      "id": 14,
+      "done": false,
+      "category": 0
+    },
+    {
+      "name": "schmutzig",
+      "id": 15,
+      "done": false,
+      "category": 0,
+      "description": "soo schmuuutzig"
+    },
+    {
+      "name": "ass",
+      "id": 16,
+      "done": true,
+      "category": 22
+    },
+    {
+      "name": "face",
+      "id": 17,
+      "done": false,
+      "category": 22
+    },
+    {
+      "name": "hands",
+      "id": 18,
+      "done": false,
+      "category": 22
+    },
+    {
+      "name": "that small things (ears)",
+      "id": 19,
+      "done": false,
+      "category": 22
+    },
+    {
+      "name": "clean karma",
+      "id": 20,
+      "done": false,
+      "category": 2,
+      "description": "use karmacleaner\n4 * 0.5l "
+    },
+    {
+      "name": "bored",
+      "id": 21,
+      "done": true,
+      "category": 23
+    },
+    {
+      "name": "too gut muzig",
+      "id": 22,
+      "done": true,
+      "category": 23
+    },
+    {
+      "name": "hungry",
+      "id": 23,
+      "done": true,
+      "category": 23
+    },
+    {
+      "name": "without reason",
+      "id": 24,
+      "done": true,
+      "category": 23
+    },
+    {
+      "name": "brain cells",
+      "id": 25,
+      "done": false,
+      "category": 5
+    },
+    {
+      "name": "big mac",
+      "id": 26,
+      "done": false,
+      "category": 4
     }
   ]
 }

@@ -28,7 +28,7 @@ const mapStateToProps = (state, ownProps) => ({
 });
 const mapDispatchToProps = (dispatch) => ({
   goForCategories: () => dispatch(fetchCategories()),
-  goForTodos: () => dispatch(fetchTodos())
+  goForTodos: () => dispatch({type: 'GET_TODOS'})
 });
 export default connect(mapStateToProps, mapDispatchToProps)(View);
 

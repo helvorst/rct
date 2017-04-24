@@ -7,8 +7,9 @@ import {toggleTodo} from '../../../actions';
 
 let Todo = (props) => {
 
-  const toggle = () => {
-    props.dispatch(toggleTodo(props.item.id))
+  const toggle = (val) => {
+    props.item.done = val;
+    props.dispatch(toggleTodo(props.item))
   };
 
   const edit = () => {
@@ -33,7 +34,7 @@ let Todo = (props) => {
         <div className="todo-body__title">
           <Checkbox label={props.item.name}
                     value={props.item.done}
-                    callback={toggle}/>
+                    callback={val => toggle(val)}/>
         </div>
         {/*<Link to={to}>edit</Link>*/}
         <Controls controls={controls}/>

@@ -7,17 +7,20 @@ import {createStore, applyMiddleware} from 'redux';
 import reducer from './reducers';
 import { createLogger } from 'redux-logger'
 import thunk  from 'redux-thunk';
-
-const middleware = [ thunk   ];
+import {rootSaga} from './actions/todo_saga';
+import createSagaMiddleware from 'redux-saga';
+const sagaMiddleware = createSagaMiddleware();
+const middleware = [ thunk, sagaMiddleware];
 if (process.env.NODE_ENV !== 'production') {
   middleware.push(createLogger());
 }
-console.log(process)
 
 const store = createStore(
   reducer,
   applyMiddleware(...middleware)
 );
+
+sagaMiddleware.run(rootSaga);
 
 ReactDOM.render(
       <Provider store={store}>
