@@ -8,6 +8,9 @@ import {selectCategory, addCategory, removeCategory, editCategory} from '../../.
 
 let CategoryList = (props) => {
 
+  if(props.categories == null){
+    return <div>loading</div>
+  }
   const actions = {
     select: id => props.dispatch(selectCategory(id)),
     add: (name, parentId) => {

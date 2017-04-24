@@ -1,18 +1,9 @@
-let categories_ = [
-  {id: 0, name: "Category 1 Clean", parent: null},
-  {id: 1, name: "Clean sub-1", parent: 0},
-  {id: 2, name: "Clean sub-2", parent: 0},
-  {id: 3, name: "Category 2 Buy", parent: null},
-  {id: 4, name: "Buy sub-1", parent: 3},
-  {id: 5, name: "Buy sub-2", parent: 3},
-  {id: 6, name: "Category 3 Paint", parent: null},
-  {id: 7, name: "Category 4 Empty", parent: null},
-  {id: 8, name: "Clean sub-2-2", parent: 2},];
 
-
-const categories = (state = categories_, action) => {
+const categories = (state = null, action) => {
 
   switch (action.type) {
+    case 'SET_CATEGORIES':
+      return [...action.list];
     case 'ADD_CATEGORY':
       return [
         {...action.payload, id: state.length},
@@ -26,7 +17,7 @@ const categories = (state = categories_, action) => {
       });
     case 'REMOVE_CATEGORY':
       //todo HOW TO REMOVE IT'S TODOS?
-      return state.filter(x => x.id != action.id);
+      return state.filter(x => x.id !== action.id);
     default:
       return state;
   }

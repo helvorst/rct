@@ -32,8 +32,9 @@ class TodoEditClass extends React.Component {
   };
   save = (save) => {
     if(save) {
-      this.state.todo.category = this.props.category;
-      this.props.dispatch(editTodo(this.state.todo));
+      const todo = Object.assign({}, this.state.todo);
+      todo.category = this.props.category;
+      this.props.dispatch(editTodo(todo));
     }
     this.props.router.push('/');
   };

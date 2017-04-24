@@ -7,8 +7,6 @@ import {toggleTodo} from '../../../actions';
 
 let Todo = (props) => {
 
-  console.log(props)
-
   const toggle = () => {
     props.dispatch(toggleTodo(props.item.id))
   };
@@ -17,7 +15,6 @@ let Todo = (props) => {
     const to = `edit/${props.category}/${props.item.id}`;
     props.router.push(to);
   };
-
 
   const controls = [
     {

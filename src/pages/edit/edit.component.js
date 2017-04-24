@@ -5,16 +5,6 @@ import pure from '../../func/pure.js';
 import Split from '../../shared/split/split.component';
 
 export default pure((props) => {
-  {/*if (props.routeInfo.params.category) {*/}
-    {/*//console.log(this.props.router.getCurrentLocation())*/}
-  //   const categoryId = +props.routeInfo.params.category;
-  //   if (categoryId !== props.category.id) {
-  //     const c = props.categories.find(x => x.id === categoryId);
-  //     props.actions.category.select(c);
-  //   }
-  // }
-
-
   const body = (
     <Split left={<CategoryList {...props}/>}
            right={<TodoEdit {...props}/>}>
