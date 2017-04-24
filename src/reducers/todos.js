@@ -1,5 +1,5 @@
 
-const todos = (state = [], action) => {
+const todos = (state = null, action) => {
 
   switch (action.type) {
     case 'SET_TODOS':

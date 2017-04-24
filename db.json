@@ -1,0 +1,150 @@
+{
+  "categories": [
+    {
+      "id": 0,
+      "name": "Clean somthing Cinderella",
+      "parent": null
+    },
+    {
+      "id": 1,
+      "name": "Clean sub-1",
+      "parent": 0
+    },
+    {
+      "id": 2,
+      "name": "Clean sub-2",
+      "parent": 0
+    },
+    {
+      "id": 3,
+      "name": "Category 2 Buy",
+      "parent": null
+    },
+    {
+      "id": 4,
+      "name": "Buy sub-1",
+      "parent": 3
+    },
+    {
+      "id": 5,
+      "name": "Buy sub-2",
+      "parent": 3
+    },
+    {
+      "id": 6,
+      "name": "Category 3 Paint",
+      "parent": null
+    },
+    {
+      "id": 7,
+      "name": "Category 4 Empty",
+      "parent": null
+    },
+    {
+      "name": "ee",
+      "parent": null,
+      "id": 17
+    },
+    {
+      "name": "ebati",
+      "parent": null,
+      "id": 18
+    },
+    {
+      "name": "baba",
+      "parent": null,
+      "id": 21
+    },
+    {
+      "name": "wash yr dirty",
+      "parent": null,
+      "id": 22
+    }
+  ],
+  "todos": [
+    {
+      "id": 0,
+      "name": "Clean windows",
+      "done": false,
+      "description": "some desc",
+      "category": 0
+    },
+    {
+      "id": 1,
+      "name": "Clean car",
+      "done": false,
+      "description": "some desc",
+      "category": 0
+    },
+    {
+      "id": 2,
+      "name": "Clean house",
+      "done": false,
+      "description": "some desc",
+      "category": 1
+    },
+    {
+      "id": 3,
+      "name": "Clean fruits",
+      "done": true,
+      "description": "some desc",
+      "category": 1
+    },
+    {
+      "id": 4,
+      "name": "buy windows",
+      "done": false,
+      "description": "some desc",
+      "category": 3
+    },
+    {
+      "id": 5,
+      "name": "buy car",
+      "done": false,
+      "description": "some desc",
+      "category": 3
+    },
+    {
+      "id": 6,
+      "name": "buy house",
+      "done": true,
+      "description": "some desc",
+      "category": 3
+    },
+    {
+      "id": 7,
+      "name": "buy fruits",
+      "done": false,
+      "description": "some desc",
+      "category": 3
+    },
+    {
+      "id": 8,
+      "name": "paint windows",
+      "done": false,
+      "description": "some desc",
+      "category": 6
+    },
+    {
+      "id": 9,
+      "name": "paint car",
+      "done": false,
+      "description": "some desc",
+      "category": 6
+    },
+    {
+      "id": 10,
+      "name": "paint house",
+      "done": false,
+      "description": "some desc",
+      "category": 6
+    },
+    {
+      "id": 11,
+      "name": "paint fruits",
+      "done": true,
+      "description": "some desc",
+      "category": 6
+    }
+  ]
+}

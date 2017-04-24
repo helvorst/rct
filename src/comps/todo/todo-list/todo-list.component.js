@@ -51,6 +51,9 @@ let TodoList = (props) => {
     callback: (name) => add(name, null)
   }];
 
+  if (!props.todos) {
+    return <div>loading wait</div>
+  }
   if (!props.todos.length) {
     return <div>no items</div>
   }
