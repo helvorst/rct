@@ -2,7 +2,7 @@
   "categories": [
     {
       "id": 0,
-      "name": "Clean somthing Cinderella",
+      "name": "Clean somthing Cinderella!",
       "parent": null
     },
     {
@@ -59,6 +59,11 @@
       "name": "wash yr dirty",
       "parent": null,
       "id": 22
+    },
+    {
+      "name": "tydu",
+      "parent": null,
+      "id": 23
     }
   ],
   "todos": [

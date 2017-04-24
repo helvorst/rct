@@ -1,17 +1,5 @@
-import getRequest from '../func/getRequest';
+export * from './category_thunk';
 
-export const fetchCategories = () => {
-  return (dispatch, getState) => {
-    // return getState().categories
-    //   ? Promise.resolve()
-    //   : fetch('http://localhost:3001/categories')
-    //     .then(rsp => rsp.json())
-    //     .then(items => dispatch(setCategories(items)));
-    return fetch('http://localhost:3001/categories')
-      .then(rsp => rsp.json())
-      .then(items => dispatch(setCategories(items)));
-  };
-};
 
 export const fetchTodos = () => {
   return (dispatch, getState) => {
@@ -52,54 +40,6 @@ export const setCategories = (list) => ({
   type: 'SET_CATEGORIES',
   list
 });
-
-export const addCategory = (cat) => {
-  return dispatch => {
-    const req = getRequest(
-      'http://localhost:3001/categories',
-      'POST',
-      cat
-    );
-    return fetch(req)
-      .then(() => dispatch(fetchCategories()));
-  };
-
-//   {
-//   type: 'ADD_CATEGORY',
-//   payload: cat
-// }
-};
-
-export const removeCategory = (id) => {
-  return dispatch => {
-    const req = getRequest(
-      `http://localhost:3001/categories/${id}`,
-      'DELETE'
-    );
-    return fetch(req)
-      .then(() => dispatch(fetchCategories()));
-  };
-  // {
-  //   type: 'REMOVE_CATEGORY',
-  //     id
-  // }
-};
-
-export const editCategory = (cat) => {
-  return dispatch => {
-    const req = getRequest(
-      `http://localhost:3001/categories/${cat.id}`,
-      'PUT',
-      cat
-    );
-    return fetch(req)
-      .then(() => dispatch(fetchCategories()));
-  };
-  // {
-  // type: 'EDIT_CATEGORY',
-  // payload: cat
-  // }
-};
 
 export const setFilter = (flt) => ({
   type: 'SET_FILTER',
