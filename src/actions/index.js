@@ -1,6 +1,9 @@
 export * from './category_thunk';
 //export * from './todo_saga';
 
+export const getTodo = () => ({
+  type: 'GET_TODOS'
+});
 
 export const addTodo = (todo) => ({
   type: 'ADD_TODO',
@@ -10,6 +13,11 @@ export const addTodo = (todo) => ({
 export const editTodo = (todo) => ({
   type: 'EDIT_TODO',
   payload: todo
+});
+
+export const setTodos = (todos) => ({
+  type: 'SET_TODOS',
+  list: todos
 });
 
 export const toggleTodo = (todo) => ({

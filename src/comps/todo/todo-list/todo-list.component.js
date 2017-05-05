@@ -5,7 +5,8 @@ import InputBtn from '../../../shared/input-button/input-button.component';
 import {connect} from 'react-redux';
 import {addTodo} from '../../../actions';
 
-let TodoList = (props) => {
+let TodoList;
+TodoList = (props) => {
 
   const add = (name) => {
     const item = {

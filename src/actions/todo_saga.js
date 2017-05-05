@@ -1,17 +1,18 @@
-import {call, put, takeEvery, takeLatest} from 'redux-saga/effects';
+import {call, put, takeEvery} from 'redux-saga/effects';
 import getRequest from '../func/getRequest';
+import {setTodos} from './index';
 
-const fetchTodos = (req) => {
+export const fetchTodos = (req) => {
   return fetch(req)
     .then(rsp => rsp.json())
 };
-
-function* get() {
-  const list = yield call(fetchTodos, getRequest(
-    'http://localhost:3001/todos',
-    'GET'
-  ));
-  yield put({type: "SET_TODOS", list});
+export const req_get =  getRequest(
+  'http://localhost:3001/todos',
+  'GET'
+);
+export function* get() {
+  const list = yield call(fetchTodos, req_get);
+  yield put(setTodos(list));
 }
 
 function* add(action) {
@@ -24,7 +25,7 @@ function* add(action) {
 }
 
 function* update(action) {
-  const list = yield call(fetchTodos, getRequest(
+  yield call(fetchTodos, getRequest(
     `http://localhost:3001/todos/${action.payload.id}`,
     'PUT',
     action.payload

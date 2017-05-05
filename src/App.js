@@ -12,7 +12,7 @@ import Split from './shared/split/split.component';
 
 const App = () => {
 
-    const headerLeft = <Header/>;
+    const headerLeft = <Header title="Todo app"/>;
     const headerRight = <Search/>;
     return (
       <div className="App">
@@ -20,12 +20,12 @@ const App = () => {
                right={headerRight}/>
         <Router history={browserHistory} >
           <Route path="/"
-                 component={View}></Route>
+                 component={View}/>
           <Route path="/edit/:category/:todo"
-                 component={Edit}></Route>
+                 component={Edit}/>
         </Router>
       </div>);
 
-}
+};
 export default App;
 

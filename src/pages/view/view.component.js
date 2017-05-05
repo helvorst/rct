@@ -5,7 +5,7 @@ import TodoList from '../../comps/todo/todo-list/todo-list.component';
 import pure from '../../func/pure';
 import Split from '../../shared/split/split.component';
 import {connect} from 'react-redux';
-import {fetchCategories, fetchTodos} from '../../actions';
+import {fetchCategories, getTodo} from '../../actions';
 
 let View = pure((props) => {
 
@@ -28,7 +28,7 @@ const mapStateToProps = (state, ownProps) => ({
 });
 const mapDispatchToProps = (dispatch) => ({
   goForCategories: () => dispatch(fetchCategories()),
-  goForTodos: () => dispatch({type: 'GET_TODOS'})
+  goForTodos: () => dispatch(getTodo())
 });
 export default connect(mapStateToProps, mapDispatchToProps)(View);
 
