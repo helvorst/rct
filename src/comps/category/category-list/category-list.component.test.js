@@ -1,5 +1,5 @@
 import React from 'react';
-import {shallow} from 'enzyme';
+import {shallow, mount} from 'enzyme';
 import configureMockStore from 'redux-mock-store';
 import CategoryList from './category-list.component';
 import Category from '../category/category';
@@ -29,8 +29,12 @@ beforeEach(() => {
   store = storeConf(storeState);
 });
 
-it('should render empty list', () => {
-  const list = shallow(<CategoryList store={store}/>);
-  console.log(list.find(<Category/>));
-  expect(list.find(<Category/>).length).toBe(3);
+it('should render list', () => {
+  const list = mount(<CategoryList store={store}/>);
+  expect(list.length).toBe(1);
+  const cats = list.find('.category-component');
+  expect(cats.length).toBe(3);
+  expect(cats.first().find('.category-title').text()).toBe('Clean somthing Cinderella!')
+  expect(list.find(Category).length).toBe(3);
 });
+

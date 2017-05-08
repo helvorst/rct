@@ -40,6 +40,7 @@ TodoList = (props) => {
       })
     }
 
+    //console.log('ren todo: ', list.length, ' done:', props.filter.done)
     return list.length > 0
       ? list.map(renderTodo)
       : <div>no items in this list</div>
