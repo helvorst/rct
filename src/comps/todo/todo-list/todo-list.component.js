@@ -74,9 +74,9 @@ TodoList = (props) => {
 
 
 const mapStateToProps = (state, ownProps) => ({
-  todos: state.todos,
+  todos: state.todos.present,
   category: state.category,
-  categories: state.categories,
+  categories: state.categories.present,
   filter: state.filter,
   ...ownProps
 });

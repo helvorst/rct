@@ -1,7 +1,7 @@
 import React  from 'react';
 import {connect} from 'react-redux';
 
-const sTp = (state, own) => ({list: state.todos ? state.todos : [], ...own});
+const sTp = (state, own) => ({list: state.todos.present ? state.todos.present : [], ...own});
 
 export default connect(sTp)((props) => {
   const match = props.list.filter(x => x[props.property]);

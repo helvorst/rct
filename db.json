@@ -1,11 +1,6 @@
 {
   "categories": [
     {
-      "id": 0,
-      "name": "Clean somthing Cinderella!",
-      "parent": null
-    },
-    {
       "id": 1,
       "name": "Clean eadable",
       "parent": 0
@@ -54,6 +49,26 @@
       "name": "new",
       "parent": null,
       "id": 24
+    },
+    {
+      "name": "sharik",
+      "parent": null,
+      "id": 25
+    },
+    {
+      "name": "asd",
+      "parent": null,
+      "id": 26
+    },
+    {
+      "name": "new cat",
+      "parent": 26,
+      "id": 27
+    },
+    {
+      "name": "new cat",
+      "parent": 27,
+      "id": 28
     }
   ],
   "todos": [
@@ -233,6 +248,42 @@
       "id": 26,
       "done": false,
       "category": 4
+    },
+    {
+      "name": "12",
+      "id": 27,
+      "done": false,
+      "category": 0
+    },
+    {
+      "name": "3",
+      "id": 28,
+      "done": false,
+      "category": 0
+    },
+    {
+      "name": "4",
+      "id": 29,
+      "done": false,
+      "category": 0
+    },
+    {
+      "name": "5",
+      "id": 30,
+      "done": false,
+      "category": 0
+    },
+    {
+      "name": "6",
+      "id": 31,
+      "done": false,
+      "category": 0
+    },
+    {
+      "name": "11",
+      "id": 32,
+      "done": false,
+      "category": 0
     }
   ]
 }

@@ -1,5 +1,5 @@
-
-const categories = (state = null, action) => {
+import undoable, {distinctState} from 'redux-undo';
+let categories = (state = null, action) => {
 
   switch (action.type) {
     case 'SET_CATEGORIES':
@@ -22,5 +22,7 @@ const categories = (state = null, action) => {
       return state;
   }
 };
-
+categories = undoable(categories, {
+  filter: distinctState()
+});
 export default categories;

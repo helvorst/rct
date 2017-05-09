@@ -30,3 +30,7 @@
 .selected {
   background-color: lightskyblue;
 }
+
+button:disabled {
+  background-color: red;
+}

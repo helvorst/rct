@@ -1,5 +1,6 @@
+import undoable, { distinctState } from 'redux-undo';
 
-const todos = (state = null, action) => {
+let todos = (state = null, action) => {
 
   switch (action.type) {
     case 'SET_TODOS':
@@ -26,5 +27,9 @@ const todos = (state = null, action) => {
       return state;
   }
 };
+
+todos = undoable(todos, {
+  filter: distinctState()
+});
 
 export default todos;

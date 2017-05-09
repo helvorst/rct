@@ -66,7 +66,7 @@ let CategoryList = (props) => {
 
 const mapStateToProps = (state, ownProps) => ({
   category: state.category,
-  categories: state.categories,
+  categories: state.categories.present,
   ...ownProps
 });
 

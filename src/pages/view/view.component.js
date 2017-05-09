@@ -6,6 +6,8 @@ import pure from '../../func/pure';
 import Split from '../../shared/split/split.component';
 import {connect} from 'react-redux';
 import {fetchCategories, getTodo} from '../../actions';
+import UndoRedoTodo from '../../shared/undoredo/undoredo.todo.container';
+import UndoRedoCategory from '../../shared/undoredo/undoredo.category.container';
 
 let View = pure((props) => {
 
@@ -15,7 +17,7 @@ let View = pure((props) => {
   return (
     <div>
       <Progress property="done"/>
-
+      <Split left={<UndoRedoCategory/>} right={<UndoRedoTodo/>}/>
       <Split left={<CategoryList {...props}/>}
              right={<TodoList {...props}/>}>
       </Split>
