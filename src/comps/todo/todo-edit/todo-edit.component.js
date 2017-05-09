@@ -16,9 +16,11 @@ class TodoEditClass extends React.Component {
     };
   }
   changeName = (name) => {
+    console.log(this.state.todo)
     this.setState({
         todo: {...this.state.todo, name}
     })
+    console.log(this.state.todo)
   };
   changeDone = (done) => {
     this.setState({
@@ -40,6 +42,7 @@ class TodoEditClass extends React.Component {
   };
 
   render () {
+    //console.log(this.state)
     const btns = {
       save: {
         name: 'save',
@@ -64,7 +67,7 @@ class TodoEditClass extends React.Component {
         </div>
 
         <Input value={this.state.todo.name}
-               callback={this.changeName}/>
+               callback={(a) => this.changeName(a)}/>
 
         <Checkbox label="Done"
                   value={this.state.todo.done}
@@ -79,7 +82,7 @@ class TodoEditClass extends React.Component {
 };
 
 const mapStateToProps = (state, ownProps) => ({
-  todos: state.todos,
+  todos: state.todos.present,
   category: state.category,
   ...ownProps
 });

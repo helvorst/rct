@@ -10,6 +10,7 @@ const cats = [
     "name": "Clean somthing Cinderella!",
     "parent": null
   },
+
   {
     "id": 1,
     "name": "Clean eadable",
@@ -22,7 +23,7 @@ const cats = [
   }];
 
 const storeConf = configureMockStore();
-const storeState = () => ({categories: cats});
+const storeState = () => ({categories: {present: cats}});
 let store;
 
 beforeEach(() => {

@@ -69,12 +69,22 @@
       "name": "new cat",
       "parent": 27,
       "id": 28
+    },
+    {
+      "name": "fgf",
+      "parent": null,
+      "id": 29
+    },
+    {
+      "name": "new cat",
+      "parent": 29,
+      "id": 30
     }
   ],
   "todos": [
     {
       "id": 0,
-      "name": "Clean windows",
+      "name": "Clean windows123",
       "done": true,
       "description": "some desc",
       "category": 0

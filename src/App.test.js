@@ -9,7 +9,8 @@ import fetchMock from 'fetch-mock';
 
 describe('startup App', () => {
   const storeConf = configureMockStore([thunk]);
-  const storeState = () => ({filter: {done: false, search: ''}});
+  const redux_stub = {present: [], past: [], future:[]};
+  const storeState = () => ({todos: redux_stub, categories: redux_stub, filter: {done: false, search: ''}});
   let store;
 
   beforeEach(() => {

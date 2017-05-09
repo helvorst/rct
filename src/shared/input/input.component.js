@@ -1,6 +1,6 @@
 import React from 'react';
 
-export default (props) => {
+const Input = (props) => {
     return <input
       className="form-control"
       type="text"
@@ -8,4 +8,5 @@ export default (props) => {
       value={props.value}
       onChange={(ev) => props.callback(ev.target.value)}/>
 
-}
+};
+export default Input;

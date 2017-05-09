@@ -61,7 +61,7 @@ describe('category: REAL store', () => {
     return store2.dispatch(fetchCategories())
       .then(() => {
         expect(fetchMock.called(getUrl)).toBe(true);
-        expect(store2.getState().categories).toEqual(cc);
+        expect(store2.getState().categories.present).toEqual(cc);
       })
   });
 
@@ -74,7 +74,7 @@ describe('category: REAL store', () => {
 
     return store2.dispatch(addCategory(newCat))
       .then(() => {
-        expect(store2.getState().categories).toEqual(ccc);
+        expect(store2.getState().categories.present).toEqual(ccc);
       })
   })
 });
