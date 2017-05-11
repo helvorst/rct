@@ -92,7 +92,7 @@
     {
       "id": 1,
       "name": "Clean car",
-      "done": false,
+      "done": true,
       "description": "some desc",
       "category": 0
     },

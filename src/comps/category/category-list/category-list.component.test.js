@@ -33,9 +33,11 @@ beforeEach(() => {
 it('should render list', () => {
   const list = mount(<CategoryList store={store}/>);
   expect(list.length).toBe(1);
-  const cats = list.find('.category-component');
-  expect(cats.length).toBe(3);
-  expect(cats.first().find('.category-title').text()).toBe('Clean somthing Cinderella!')
+  const categs = list.find('.category-component');
+  expect(categs.length).toBe(3);
   expect(list.find(Category).length).toBe(3);
+  categs.find('.category-title').forEach((val, key) => {
+    expect(val.text()).toBe(cats[key].name)
+  });
 });
 

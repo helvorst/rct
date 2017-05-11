@@ -3,10 +3,9 @@ import Button from '../../../shared/button/button.component';
 import Input from '../../../shared/input/input.component';
 import Checkbox from '../../../shared/checkbox/checkbox.component';
 import Textarea from '../../../shared/textarea/textarea.component';
-import {connect} from 'react-redux';
 import {editTodo} from '../../../actions';
 
-class TodoEditClass extends React.Component {
+export default class TodoEditComponent extends React.Component {
   constructor(props) {
     super(props);
     const todoId = props.params.todo;
@@ -15,12 +14,11 @@ class TodoEditClass extends React.Component {
       todo: {...this.todo}
     };
   }
+
   changeName = (name) => {
-    console.log(this.state.todo)
     this.setState({
         todo: {...this.state.todo, name}
     })
-    console.log(this.state.todo)
   };
   changeDone = (done) => {
     this.setState({
@@ -42,7 +40,6 @@ class TodoEditClass extends React.Component {
   };
 
   render () {
-    //console.log(this.state)
     const btns = {
       save: {
         name: 'save',
@@ -62,8 +59,8 @@ class TodoEditClass extends React.Component {
       <div>
 
         <div>
-          <Button {...btns.save}/>
-          <Button {...btns.cancel}/>
+          <Button {...btns.save} key="save"/>
+          <Button {...btns.cancel} key="cancel"/>
         </div>
 
         <Input value={this.state.todo.name}
@@ -71,21 +68,13 @@ class TodoEditClass extends React.Component {
 
         <Checkbox label="Done"
                   value={this.state.todo.done}
-                  callback={this.changeDone}/>
+                  callback={(b) => this.changeDone(b)}/>
 
 
         <Textarea value={this.state.todo.description}
-                  callback={this.changeDesc}/>
+                  callback={c => this.changeDesc(c)}/>
 
       </div>)
   }
 };
 
-const mapStateToProps = (state, ownProps) => ({
-  todos: state.todos.present,
-  category: state.category,
-  ...ownProps
-});
-
-const TodoEdit = connect(mapStateToProps)(TodoEditClass);
-export default TodoEdit;
